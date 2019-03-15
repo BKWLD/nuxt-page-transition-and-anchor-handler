@@ -12,12 +12,27 @@ export default function({ app, route, store }, inject) {
 	store.registerModule('ptah', {
 		namespaced: true,
 		state: {
-			scrolling: Promise.resolve(), // Whether currently scrolling
+			scrolling: Promise.resolve(),
+			isScrolling: false,
+			isTransitioning: false,
 		},
 		mutations: {
-			startScroll: function(state, promise) { // Start tracking a new scroll 
+			
+			// Track scrolling
+			startScroll: function(state, promise) {
 				state.scrolling = promise;
-			}
+				state.isScrolling = true
+			},
+			
+			// Mark the scroll stopped
+			stopScroll: function(state) {
+				state.isScrolling = false
+			},
+			
+			// Track transitioning
+			transitioning: function(state, bool) {
+				state.isTransitioning = bool
+			},
 		}
 	})
 	
@@ -28,6 +43,10 @@ export default function({ app, route, store }, inject) {
 				maxDuration: options.animatedScrollTo.maxDuration,
 				onComplete: function() { resolve() },
 			})
+			
+		// Update the scolling boolean after it's done
+		}).then(function() {
+			store.commit('ptah/stopScroll')
 		}))
 	}
 	
@@ -67,5 +86,10 @@ export default function({ app, route, store }, inject) {
 	// Inject a scroll to top helper 
 	inject('scrollToTop', function () {
 		scrollTo(0)
+	})
+	
+	// Syntactic sugare for getitng the scrolling boolean
+	inject('scrollComplete', function () {
+		return store.state.ptah.scrolling;
 	})
 }

@@ -1,0 +1,15 @@
+/* Simple opacity twean */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+/* The leaving page gets position absolute so the two pages can cross dissolve */
+.page-leave-active {
+  position: absolute;
+  width: 100vw;
+}
