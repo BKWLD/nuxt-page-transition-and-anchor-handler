@@ -29,3 +29,11 @@ This package add animated scrolling to all anchor links using [animated-scroll-t
 - `anchorSelector` (`[data-anchor={{anchor}}]`) - The selector to scroll to. `{{anchor}}` will be replaced with the URL hash (minus the '#').
 - `transition` (see source code) - The Nuxt [transition](https://nuxtjs.org/api/configuration-transition) object
 - `animatedScrollTo` (see source code) - Configuration options that can be passed to [animated-scroll-to](https://github.com/Stanko/animated-scroll-to)
+
+## Methods
+
+These methods are injected globally:
+
+- `this.$scrollTo(target)` - Target can be a number or a DOM element
+- `this.$scrollToTop()` - Shorthand for this.$scrollTo(0)
+- `this.$scrollComplete()` - Returns a Promise that resolves when the current scroll finishes

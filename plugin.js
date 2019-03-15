@@ -51,7 +51,7 @@ export default function({ app, route, store }, inject) {
 	}
 	
 	// Scroll to the current anchor on the page
-	const scrollToAnchor = function() {
+	const scollToHash = function() {
 		
 		// Require a hash
 		if (!app.router.currentRoute.hash) return
@@ -71,18 +71,18 @@ export default function({ app, route, store }, inject) {
 	app.router.afterEach(function (to, from) {
 		if (to.path === from.path && to.hash !== from.hash) {
 			console.log('afterEach');
-			scrollToAnchor();
+			scollToHash();
 		}
 	})
 	
 	// Listen for the initial page build and then wait a bit for it to finish
 	// rendering.
 	window.onNuxtReady(function() {
-		return setTimeout(scrollToAnchor, options.initialDelay);
+		return setTimeout(scollToHash, options.initialDelay);
 	})
 	
-	// Inject scrolling logic globally
-	inject('scrollToAnchor', scrollToAnchor)
+	// Inject a scroll to top helper 
+	inject('scrollTo', scrollTo)
 	
 	// Inject a scroll to top helper 
 	inject('scrollToTop', function () {
@@ -102,6 +102,6 @@ export default function({ app, route, store }, inject) {
 	// Handle afterEnter transition events (e.g. the transition is done)
 	inject('afterPageEnter', function() {
 		this.$store.commit('ptah/transitioning', false)
-		scrollToAnchor() // If route change included a hash, scroll to it
+		scollToHash() // If route change included a hash, scroll to it
 	})
 }
