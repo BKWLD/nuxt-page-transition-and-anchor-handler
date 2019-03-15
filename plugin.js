@@ -77,7 +77,7 @@ export default function({ app, route, store }, inject) {
 	// Listen for the initial page build and then wait a bit for it to finish
 	// rendering.
 	window.onNuxtReady(function() {
-		return setTimeout(scrollToAnchor, 500);
+		return setTimeout(scrollToAnchor, options.initialDelay);
 	})
 	
 	// Inject scrolling logic globally

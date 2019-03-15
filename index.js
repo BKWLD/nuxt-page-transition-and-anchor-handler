@@ -8,6 +8,7 @@ module.exports = function (options) {
   // Default module options
   options = defaultsDeep(options, {
     css: true, // Include the css
+    initialDelay: 500,
     anchorSelector: '[data-anchor={{anchor}}]',
     transition: {
       name: 'page',
