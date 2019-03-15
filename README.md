@@ -20,6 +20,7 @@ This package add animated scrolling to all anchor links using [animated-scroll-t
 		await app.$scrollComplete() 
 	}
 }
+```
 
 ## Options
 
