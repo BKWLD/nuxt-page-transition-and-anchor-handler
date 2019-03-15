@@ -13,8 +13,8 @@ module.exports = function (options) {
     transition: {
       name: 'page',
       mode: '', // So that the transition between pages feels faster
-      beforeLeave: function() { this.$store.commit('ptah/transitioning', true) },
-      afterEnter: function() { this.$store.commit('ptah/transitioning', false) },
+      beforeLeave: function() { this.$beforePageLeave() },
+      afterEnter: function() { this.$afterPageEnter() },
     },
     animatedScrollTo: {
       maxDuration: 400

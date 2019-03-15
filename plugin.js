@@ -70,6 +70,7 @@ export default function({ app, route, store }, inject) {
 	// handled by the global layout transition.
 	app.router.afterEach(function (to, from) {
 		if (to.path === from.path && to.hash !== from.hash) {
+			console.log('afterEach');
 			scrollToAnchor();
 		}
 	})
@@ -91,5 +92,16 @@ export default function({ app, route, store }, inject) {
 	// Syntactic sugare for getitng the scrolling boolean
 	inject('scrollComplete', function () {
 		return store.state.ptah.scrolling;
+	})
+	
+	// Handle beforeLeave transition events (e.g. the transition has started)
+	inject('beforePageLeave', function() {
+		this.$store.commit('ptah/transitioning', true)
+	})
+	
+	// Handle afterEnter transition events (e.g. the transition is done)
+	inject('afterPageEnter', function() {
+		this.$store.commit('ptah/transitioning', false)
+		scrollToAnchor() // If route change included a hash, scroll to it
 	})
 }
