@@ -12,7 +12,7 @@ export default function({ app, route, store }, inject) {
 	store.registerModule('ptah', {
 		namespaced: true,
 		state: {
-			scrolling: Promise.resolve(),
+			scrolling: process.client ? Promise.resolve() : null,
 			isScrolling: false,
 			isTransitioning: false,
 		},
