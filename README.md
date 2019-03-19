@@ -8,16 +8,16 @@ This package add animated scrolling to all anchor links using [animated-scroll-t
 2. Add the following to your Nuxt "Pages" `asyncData`:
 ```js
 {
-	asyncData: function({app}) {
+	asyncData: async function({app}) {
 		// Scrolls to top of the page
-		app.$scrollToTop() 
+		 if (process.client) app.$scrollToTop() 
 		
 		// ... 
 		// ...Load your page data
 		// ...
 		
 		// Makes sure scroll has finished before allowing page transition to start
-		await app.$scrollComplete() 
+		if (process.client) await app.$scrollComplete() 
 	}
 }
 ```
