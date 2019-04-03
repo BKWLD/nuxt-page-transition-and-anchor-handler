@@ -32,7 +32,13 @@ module.exports = function (options) {
     this.options.css.push(path.resolve(__dirname, 'transition.css'))
   }
   
-  // Add the plugin
+  // Stub out client side injections so they don't break usage during SSR
+  this.addPlugin({
+    src: path.resolve(__dirname, 'no-ops.js'),
+    fileName: 'nuxt-page-transition-and-anchor-handler-no-ops.js',
+  })
+  
+  // Add the plugin, which overrides the no-op injections
   this.addPlugin({
     src: path.resolve(__dirname, 'plugin.js'),
     fileName: 'nuxt-page-transition-and-anchor-handler.js',
