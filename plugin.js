@@ -70,7 +70,6 @@ export default function({ app, route, store }, inject) {
 	// handled by the global layout transition.
 	app.router.afterEach(function (to, from) {
 		if (to.path === from.path && to.hash !== from.hash) {
-			console.log('afterEach');
 			scollToHash();
 		}
 	})
