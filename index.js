@@ -26,6 +26,7 @@ module.exports = function (options) {
   
   // Set the Nuxt page transition
   this.options.transition = options.transition
+  this.options.pageTransition = options.transition // Nuxt >= 2.7
   
   // Add the class
   if (options.css == true) {
