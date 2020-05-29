@@ -37,13 +37,14 @@ module.exports = function (options) {
   this.addPlugin({
     src: path.resolve(__dirname, 'no-ops.js'),
     fileName: 'nuxt-page-transition-and-anchor-handler-no-ops.js',
+    mode: 'server',
   })
   
   // Add the plugin, which overrides the no-op injections
   this.addPlugin({
     src: path.resolve(__dirname, 'plugin.js'),
     fileName: 'nuxt-page-transition-and-anchor-handler.js',
-    ssr: false,
+    mode: 'client',
     options: JSON.stringify(options), // Pass through all options
   })
 }
