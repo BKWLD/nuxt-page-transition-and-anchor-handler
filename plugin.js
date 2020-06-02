@@ -38,14 +38,12 @@ export default function({ app, route, store }, inject) {
 	
 	// Scroll and store whether a scroll is happening in vuex
 	const scrollTo = function(target) {
-		store.commit('ptah/startScroll', new Promise(function(resolve) {
-			animatedScrollTo(target, {
-				...options.animatedScrollTo,
-				onComplete: function() { resolve() },
-			})
+		store.commit('ptah/startScroll', animatedScrollTo(target, {
+			...options.animatedScrollTo,
+		})
 			
 		// Update the scolling boolean after it's done
-		}).then(function() {
+		.then(function() {
 			store.commit('ptah/stopScroll')
 		}))
 	}
