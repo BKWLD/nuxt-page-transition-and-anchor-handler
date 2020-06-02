@@ -101,4 +101,9 @@ export default function({ app, route, store }, inject) {
 		this.$store.commit('ptah/transitioning', false)
 		scollToHash() // If route change included a hash, scroll to it
 	})
+
+	// Set the vertical offset at runtime
+	inject('setVerticalOffset', function(height) {
+		options.animatedScrollTo.verticalOffset = height
+	})
 }

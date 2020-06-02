@@ -40,3 +40,4 @@ These methods are injected globally:
 - `this.$scrollTo(target)` - Target can be a number or a DOM element
 - `this.$scrollToTop()` - Shorthand for this.$scrollTo(0)
 - `this.$scrollComplete()` - Returns a Promise that resolves when the current scroll finishes
+- `this.$setVerticalOffset()` - Set the vertical offset. You might use this when the header height changes responsively.
