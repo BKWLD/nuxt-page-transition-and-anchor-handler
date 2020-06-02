@@ -40,7 +40,7 @@ export default function({ app, route, store }, inject) {
 	const scrollTo = function(target) {
 		store.commit('ptah/startScroll', new Promise(function(resolve) {
 			animatedScrollTo(target, {
-				maxDuration: options.animatedScrollTo.maxDuration,
+				...options.animatedScrollTo,
 				onComplete: function() { resolve() },
 			})
 			
