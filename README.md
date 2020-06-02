@@ -25,6 +25,8 @@ This package add animated scrolling to all anchor links using [animated-scroll-t
 
 ## Options
 
+Can be set with the module or in the config file under the `ptah` key.
+
 - `css` (`true`) - Include the default transition styles (see `transition.css`)
 - `initialDelay` (`500`) - How long to wait after the `window.onNuxtReady` event before handling the initial page anchor.  This gives the page a chance to render the elements you are trying to scroll to.
 - `anchorSelector` (`[data-anchor={{anchor}}]`) - The selector to scroll to. `{{anchor}}` will be replaced with the URL hash (minus the '#').
