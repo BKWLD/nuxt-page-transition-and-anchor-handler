@@ -95,10 +95,12 @@ export default function({ app, route, store }, inject) {
 	inject('beforePageLeave', function() {
 		this.$store.commit('ptah/transitioning', true)
 	})
-	// Handle afterEnter transition events (e.g. the transition is done)
+
+	// Handle afterEnter transition events (e.g. the transition is done),
+	// scrolling if there is a relevant hash after waiting a tick.
 	inject('afterPageEnter', function() {
 		this.$store.commit('ptah/transitioning', false)
-		scollToHash() // If route change included a hash, scroll to it
+		setTimeout(scollToHash, 0)
 	})
 
 	// Set the vertical offset at runtime
