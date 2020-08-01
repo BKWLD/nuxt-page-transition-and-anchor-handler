@@ -7,9 +7,8 @@ const options = JSON.parse('<%= options %>');
 // Export the plugin config
 export default function({ app, route, store }, inject) {
 
-	// Add our VueX module to the store.  I tried to make a seperate file but
-	// something gets confused in the Nuxt module
-	store.registerModule('ptah', {
+	// Make the VueX module
+	const vuexModule = {
 		namespaced: true,
 		state: {
 			scrolling: process.client ? Promise.resolve() : null,
@@ -34,6 +33,14 @@ export default function({ app, route, store }, inject) {
 				state.isTransitioning = bool
 			},
 		}
+	}
+
+	// Add our VueX module to the store.  I tried to make a seperate file but
+	// something gets confused in the Nuxt module. It seems to want to preserve
+	// state by default, so I'm explicitly disabling this so state doesn't end
+	// up undefined when running in SSR
+	store.registerModule('ptah', vuexModule, {
+		preserveState: false
 	})
 
 	// Scroll and store whether a scroll is happening in vuex
