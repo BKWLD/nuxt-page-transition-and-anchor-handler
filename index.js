@@ -16,7 +16,7 @@ module.exports = function (options) {
 		initialDelay: 500,
 		anchorSelector: '[data-anchor={{anchor}}]',
 		transition: {
-			name: 'page',
+			name: 'ptah',
 			mode: '', // So that the transition between pages feels faster
 			beforeLeave: function() { this.$beforePageLeave() },
 			afterEnter: function() { this.$afterPageEnter() },
