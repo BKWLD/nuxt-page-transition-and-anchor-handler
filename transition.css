@@ -11,5 +11,5 @@
 /* The leaving page gets position absolute so the two pages can cross dissolve */
 .ptah-leave-active {
   position: absolute;
-  width: 100vw;
+  width: 100%;
 }
