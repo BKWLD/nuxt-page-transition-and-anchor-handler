@@ -9,16 +9,16 @@ This package add animated scrolling to all anchor links using [animated-scroll-t
 ```js
 {
 	asyncData: async function({app}) {
-		
+
 		// Scrolls to top of the page
-		 app.$scrollToTop() 
-		
-		// ... 
+		 app.$scrollToTop()
+
+		// ...
 		// ...Load your page data
 		// ...
-		
+
 		// Makes sure scroll has finished before allowing page transition to start
-		await app.$scrollComplete() 
+		await app.$scrollComplete()
 	}
 }
 ```
