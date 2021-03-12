@@ -1,11 +1,8 @@
-// Deps
-import animatedScrollTo from 'animated-scroll-to'
-
 // Get settings from the module
 const options = JSON.parse('<%= options %>');
 
 // Export the plugin config
-export default function({ app, route, store }, inject) {
+export default function({ app, store }, inject) {
 
 	// Make the VueX module
 	const vuexModule = {
@@ -43,11 +40,16 @@ export default function({ app, route, store }, inject) {
 		preserveState: false
 	})
 
-	// Scroll and store whether a scroll is happening in vuex
-	const scrollTo = function(target) {
-		store.commit('ptah/startScroll', animatedScrollTo(target, {
-			...options.animatedScrollTo,
-		})
+	// Scroll to an element or value
+	function scrollTo (target) {
+
+		// Figure out the offset we're scrolling to
+		const scrollY = target instanceof Element ?
+			Math.floor(target.getBoundingClientRect().top + window.scrollY) :
+			parseInt(target)
+
+		// Start scrolling
+		store.commit('ptah/startScroll', executeScroll(scrollY)
 
 		// Update the scolling boolean after it's done
 		.then(function() {
@@ -55,8 +57,42 @@ export default function({ app, route, store }, inject) {
 		}))
 	}
 
+	// Do the scrolling and return a promise
+	function executeScroll(scrollY) {
+		return executeNativeScroll(scrollY)
+	}
+
+	// Do native scrolling and watch for scroll to complete. Using polling
+	let checkScrollDone;
+	function executeNativeScroll(scrollY) {
+
+		// If already at target, immediately resolve
+		if (window.scrollY == scrollY) return Promise.resolve()
+
+		// Cancel previous scroll listener
+		if (checkScrollDone) {
+			window.removeEventListener('scroll', checkScrollDone, { passive: true })
+		}
+
+		// Make promise
+		return new Promise(resolve => {
+
+			// Check if the scroll has finished
+			checkScrollDone = () => {
+				if (window.scrollY != scrollY) return
+				window.removeEventListener('scroll', checkScrollDone, { passive: true })
+				checkScrollDone = null
+				resolve()
+			}
+
+			// Start scrolling and listener for complete
+			window.addEventListener('scroll', checkScrollDone, { passive: true })
+			window.scrollTo({ top: scrollY, behavior: 'smooth' })
+		})
+	}
+
 	// Scroll to the current anchor on the page
-	const scollToHash = function() {
+	function scollToHash() {
 
 		// Require a hash
 		if (!app.router.currentRoute.hash) return

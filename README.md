@@ -1,9 +1,10 @@
 # nuxt-page-transition-and-anchor-handler
 
-This package add animated scrolling to all anchor links using [animated-scroll-to](https://github.com/Stanko/animated-scroll-to).  It also adds a default cross-dissolve page transition which feels faster than the normal Nuxt `out-in` transition.  This works best when you do the second step of **Install**, making the page scroll to top before the transition starts.
+This package add animated scrolling to all anchor links using [scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo).  It also adds a default cross-dissolve page transition which feels faster than the normal Nuxt `out-in` transition.  This works best when you do the second step of **Install**, making the page scroll to top before the transition starts.
 
 ## Install
 
+1. `yarn add nuxt-page-transition-and-anchor-handler` or `npm install nuxt-page-transition-and-anchor-handler`
 1. Add `nuxt-page-transition-and-anchor-handler` to your `modules` array
 2. Add the following to your Nuxt "Pages" `asyncData`:
 ```js
@@ -23,6 +24,8 @@ This package add animated scrolling to all anchor links using [animated-scroll-t
 }
 ```
 
+If you need to support browsers that don't support [`ScrollToOptions`](https://caniuse.com/mdn-api_scrolltooptions) give [`smoothscroll-polyfill`](https://github.com/iamdustan/smoothscroll) a shot.
+
 ## Options
 
 Can be set with the module or in the config file under the `ptah` key.
@@ -31,7 +34,9 @@ Can be set with the module or in the config file under the `ptah` key.
 - `initialDelay` (`500`) - How long to wait after the `window.onNuxtReady` event before handling the initial page anchor.  This gives the page a chance to render the elements you are trying to scroll to.
 - `anchorSelector` (`[data-anchor={{anchor}}]`) - The selector to scroll to. `{{anchor}}` will be replaced with the URL hash (minus the '#').
 - `transition` (see source code) - The Nuxt [transition](https://nuxtjs.org/api/configuration-transition) object
-- `animatedScrollTo` (see source code) - Configuration options that can be passed to [animated-scroll-to](https://github.com/Stanko/animated-scroll-to)
+- `scroller` - Instead of using the `scrollTo`, provide your own API for scrolling. This is useful when using a smooth scrolling library.  Should be an object that implements the following methods:
+	- `scrollTo(el)` - Scroll to the `el` element. The method should return a promise that resolves when the scroll is finished.
+	- `scrollToTop()` - Scroll to the top of the page. The method should return a promise that resolves when the scroll is finished.
 
 ## Methods
 

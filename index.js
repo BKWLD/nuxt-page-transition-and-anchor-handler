@@ -22,10 +22,6 @@ module.exports = function (options) {
 			afterEnter: function() { this.$afterPageEnter() },
 			...(options.transition || {}),
 		},
-		animatedScrollTo: {
-			maxDuration: 400,
-			...(options.animatedScrollTo || {}),
-		},
 		...options
 	}
 
