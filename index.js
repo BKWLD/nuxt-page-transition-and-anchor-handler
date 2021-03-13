@@ -14,6 +14,7 @@ module.exports = function (options) {
 	options = {
 		css: true, // Include the css
 		initialDelay: 500,
+		afterPageChangeDelay: 0,
 		anchorSelector: '[data-anchor={{anchor}}]',
 		transition: {
 			name: 'ptah',

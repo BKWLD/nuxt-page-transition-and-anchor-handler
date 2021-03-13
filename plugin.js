@@ -140,10 +140,10 @@ export default function({ app, store }, inject) {
 	})
 
 	// Handle afterEnter transition events (e.g. the transition is done),
-	// scrolling if there is a relevant hash after waiting a tick.
+	// scrolling if there is a relevant hash after waiting a tick (at minimum).
 	inject('afterPageEnter', function() {
 		this.$store.commit('ptah/transitioning', false)
-		setTimeout(scollToHash, 0)
+		setTimeout(scollToHash, options.afterPageChangeDelay)
 	})
 
 	// Set the vertical offset at runtime
