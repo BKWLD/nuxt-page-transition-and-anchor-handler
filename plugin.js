@@ -57,14 +57,9 @@ export default function({ app, store }, inject) {
 		}))
 	}
 
-	// Do the scrolling and return a promise
-	function executeScroll(scrollY) {
-		return executeNativeScroll(scrollY)
-	}
-
 	// Do native scrolling and watch for scroll to complete. Using polling
 	let checkScrollDone;
-	function executeNativeScroll(scrollY) {
+	function executeScroll(scrollY) {
 
 		// If already at target, immediately resolve
 		if (window.scrollY == scrollY) return Promise.resolve()
