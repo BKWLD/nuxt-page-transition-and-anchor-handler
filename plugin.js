@@ -129,7 +129,7 @@ export default function({ app, store }, inject) {
 		scrollTo(0)
 	})
 
-	// Syntactic sugare for getitng the scrolling boolean
+	// Syntactic sugare for getting the scrolling boolean
 	inject('scrollComplete', function () {
 		return store.state.ptah.scrolling;
 	})
