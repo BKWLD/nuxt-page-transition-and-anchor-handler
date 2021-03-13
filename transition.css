@@ -1,6 +1,6 @@
 /* Simple opacity that overlaps new page instead of cross dissolving */
-.ptah-enter-active,
-.ptah-leave-active {
+.ptah-enter-active {
+  position: relative;
   transition: opacity 0.4s;
 }
 .ptah-enter {
