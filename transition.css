@@ -9,6 +9,7 @@
 
 /* The leaving page gets position absolute so the two pages can cross dissolve */
 .ptah-leave-active {
+  transition-delay: 0.4s;
   position: absolute;
   width: 100%;
 }
