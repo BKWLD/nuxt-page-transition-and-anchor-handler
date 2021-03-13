@@ -1,15 +1,15 @@
 /* Simple opacity that overlaps new page instead of cross dissolving */
 .ptah-enter-active {
-  position: relative;
-  transition: opacity 0.4s;
+	position: relative;
+	transition: opacity 0.4s;
 }
 .ptah-enter {
-  opacity: 0;
+	opacity: 0;
 }
 
 /* The leaving page gets position absolute so the two pages can cross dissolve */
 .ptah-leave-active {
-  transition-delay: 0.4s;
-  position: absolute;
-  width: 100%;
+	transition-delay: 0.4s;
+	position: absolute;
+	width: 100%;
 }
