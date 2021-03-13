@@ -1,10 +1,9 @@
-/* Simple opacity twean */
+/* Simple opacity that overlaps new page instead of cross dissolving */
 .ptah-enter-active,
 .ptah-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.4s;
 }
-.ptah-enter,
-.ptah-leave-to {
+.ptah-enter {
   opacity: 0;
 }
 
