@@ -150,8 +150,13 @@ export default function({ app, store }, inject) {
 	// before asyncData. We're not scrolling to top on query param changes or
 	// hash changes which are assumed to be the same page. When from.name is
 	// undefined, this indicates the initial request and thus no need to scroll.
+	// We're waiting a tick to do the scroll so that any other code that reacts
+	// to act on beforEach, like clearing body scroll locks, has a chance to
+	// execute first.
 	app.router.beforeEach((to, from, next) => {
-		if (process.client && from.name && to.path != from.path) scrollTo(0)
+		if (process.client && from.name && to.path != from.path) {
+			setTimeout(() => { scrollTo(0) }, 0)
+		}
 		next()
 	})
 
