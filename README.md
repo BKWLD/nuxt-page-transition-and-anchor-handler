@@ -5,23 +5,7 @@ This package add animated scrolling to all anchor links using [scrollTo](https:/
 ## Install
 
 1. `yarn add nuxt-page-transition-and-anchor-handler` or `npm install nuxt-page-transition-and-anchor-handler`
-1. Add `nuxt-page-transition-and-anchor-handler` to your `modules` array
-2. Add the following to your Nuxt "Pages" `asyncData`:
-```js
-{
-	asyncData: async function({app}) {
-
-		// Scrolls to top of the page
-		 app.$scrollToTop()
-
-		// ...
-		// ...Load your page data
-		// ...
-
-		// Makes sure scroll has finished before allowing page transition to start
-		await app.$scrollComplete()
-	}
-}
+2. Add `nuxt-page-transition-and-anchor-handler` to your `modules` array
 ```
 
 If you need to support browsers that don't support [`ScrollToOptions`](https://caniuse.com/mdn-api_scrolltooptions) give [`smoothscroll-polyfill`](https://github.com/iamdustan/smoothscroll) a shot.

@@ -145,4 +145,21 @@ export default function({ app, store }, inject) {
 	inject('setVerticalOffset', function(height) {
 		options.animatedScrollTo.verticalOffset = height
 	})
+
+	// Scroll to top when switching to page with a new path. This hook is fired
+	// before asyncData. We're not scrolling to top on query param changes or
+	// hash changes which are assumed to be the same page. When from.name is
+	// undefined, this indicates the initial request and thus no need to scroll.
+	app.router.beforeEach((to, from, next) => {
+		if (process.client && from.name && to.path != from.path) scrollTo(0)
+		next()
+	})
+
+	// Wait until scrolling to top has finished. This hook is fired after
+	// asyncData but before navigation happens
+	app.router.beforeResolve((to, from, next) => {
+		if (process.client) store.state.ptah.scrolling.then(next)
+		else next()
+	})
+
 }
