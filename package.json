@@ -1,6 +1,6 @@
 {
   "name": "nuxt-page-transition-and-anchor-handler",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Scroll to top before page transition, handle anchor links, and cross-dissolve between pages",
   "main": "index.js",
   "repository": "git@github.com:BKWLD/nuxt-page-transition-and-anchor-handler.git",
