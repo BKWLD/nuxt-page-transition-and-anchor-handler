@@ -161,10 +161,14 @@ export default function({ app, store }, inject) {
 	})
 
 	// Wait until scrolling to top has finished. This hook is fired after
-	// asyncData but before navigation happens
+	// asyncData but before navigation happens. It needs to wait a tick so that
+	// it doesn't fire before beforeEach when statically generated with preloaded
+	// data.
 	app.router.beforeResolve((to, from, next) => {
-		if (process.client) store.state.ptah.scrolling.then(next)
-		else next()
+		setTimeout(() => {
+			if (process.client) store.state.ptah.scrolling.then(next)
+			else next()
+		}, 0)
 	})
 
 }
