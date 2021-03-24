@@ -13,6 +13,7 @@ module.exports = function (options) {
 	// Set defaults
 	options = {
 		css: true, // Include the css
+		scrollToTopBeforePageChange: true,
 		initialDelay: 500,
 		afterPageChangeDelay: 0,
 		anchorSelector: '[data-anchor={{anchor}}]',
@@ -27,14 +28,16 @@ module.exports = function (options) {
 	}
 
 	// This package will controll scroll behavior instead
-	this.options.router.scrollBehavior = function() { return false }
+	if (options.scrollToTopBeforePageChange) {
+		this.options.router.scrollBehavior = function() { return false }
+	}
 
 	// Set the Nuxt page transition
 	this.options.transition = options.transition
 	this.options.pageTransition = options.transition // Nuxt >= 2.7
 
 	// Add the class
-	if (options.css == true) {
+	if (options.css) {
 		this.options.css.push(path.resolve(__dirname, 'transition.css'))
 	}
 

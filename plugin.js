@@ -124,7 +124,7 @@ export default function({ app, store }, inject) {
 		scrollTo(0)
 	})
 
-	// Syntactic sugare for getting the scrolling boolean
+	// Syntactic sugar for getting the scrolling boolean
 	inject('scrollComplete', function () {
 		return store.state.ptah.scrolling;
 	})
@@ -153,22 +153,26 @@ export default function({ app, store }, inject) {
 	// We're waiting a tick to do the scroll so that any other code that reacts
 	// to act on beforEach, like clearing body scroll locks, has a chance to
 	// execute first.
-	app.router.beforeEach((to, from, next) => {
-		if (process.client && from.name && to.path != from.path) {
-			setTimeout(() => { scrollTo(0) }, 0)
-		}
-		next()
-	})
+	if (options.scrollToTopBeforePageChange) {
+		app.router.beforeEach((to, from, next) => {
+			if (process.client && from.name && to.path != from.path) {
+				setTimeout(() => { scrollTo(0) }, 0)
+			}
+			next()
+		})
+	}
 
 	// Wait until scrolling to top has finished. This hook is fired after
 	// asyncData but before navigation happens. It needs to wait a tick so that
 	// it doesn't fire before beforeEach when statically generated with preloaded
 	// data.
-	app.router.beforeResolve((to, from, next) => {
-		setTimeout(() => {
-			if (process.client) store.state.ptah.scrolling.then(next)
-			else next()
-		}, 0)
-	})
+	if (options.scrollToTopBeforePageChange) {
+		app.router.beforeResolve((to, from, next) => {
+			setTimeout(() => {
+				if (process.client) store.state.ptah.scrolling.then(next)
+				else next()
+			}, 0)
+		})
+	}
 
 }
